@@ -70,7 +70,7 @@ a:hover {
     color: var(--accent-color) !important;
 }
 
-.intexp {
+.method-name {
     font-weight: 600;
     font-style: italic;
 }
