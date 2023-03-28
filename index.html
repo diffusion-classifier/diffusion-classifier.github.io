@@ -257,9 +257,9 @@
                                     \(\mathbf c\)
                                     that best predicts the noise added to the input image. <span
                                         class="method-name">Diffusion Classifier</span> can be used to extract a
-                                    <u>zero-shot classifier from a text-to-image model (like Stable Diffusion)</u> and a
-                                    <u>standard classifier from a class-conditional model (like DiT)</u> without any
-                                    additional training
+                                    <u>zero-shot classifier from a text-to-image model</u> (like Stable Diffusion) and a
+                                    <u>standard classifier from a class-conditional model</u> (like DiT) without any
+                                    additional training.
                                 </p>
                             </div>
                         </div>
@@ -284,7 +284,7 @@
                             \end{equation}
                         </p>
                         <p>
-                            A uniform prior over \(\{\mathbf{c}_i\}\) (<i>i.e.,</i> \(p(\mathbf{c}_i) = \frac{1}{N}\)) is natural and leads to all of the \(p(\mathbf{c})\) terms cancelling. For diffusion models, computing \(p_\theta(\mathbf{x}\mid \mathbf{c})\) is intractable, so we approximate it with the ELBO (see paper &sect3.1), from which we have dropped constant and weighting terms:
+                            A uniform prior over \(\{\mathbf{c}_i\}\) (<i>i.e.,</i> \(p(\mathbf{c}_i) = \frac{1}{N}\)) is natural and leads to all of the \(p(\mathbf{c})\) terms cancelling. For diffusion models, computing \(\log p_\theta(\mathbf{x}\mid \mathbf{c})\) is intractable, so we approximate it with the ELBO (see paper &sect3.1), from which we have dropped constant and weighting terms:
                             \begin{align}
                                 \text{ELBO} \approx - \mathbb{E}_{t, \epsilon}[\|\epsilon - \epsilon_\theta(\mathbf{x}_t, \mathbf{c}_i)\|^2]
                             \end{align}
@@ -437,6 +437,21 @@
             </div>
         </div>
         <!--/ Zero Shot. -->
+    </section>
+
+    <section class="section">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-three-quarters">
+                    <h2 class="title is-3">Improved Relational Reasoning Abilities</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                            We compare our zero-shot <span class="method-name">Diffusion Classifier</span> method to contrastive models like CLIP on Winoground, a popular benchmark for evaluating the visuo-linguistic compositional reasoning abilities of vision-language models.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <section class="section" id="paper">
