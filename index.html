@@ -192,14 +192,12 @@
                     <div class="content has-text-justified">
                         <p>
                             The recent wave of large-scale text-to-image diffusion models has dramatically increased our text-based image generation abilities. These models can generate realistic images for a staggering variety of prompts and exhibit impressive compositional generalization abilities. 
-                        </p>
-                        <p>
                             Almost all use cases thus far have solely focused on <i>sampling</i>; however, diffusion models can also provide conditional density estimates, which are useful for tasks beyond image generation.
                         </p>
                         <p>
-                            In this paper, we show that the density estimates from large-scale text-to-image diffusion models like Stable Diffusion can be leveraged to perform zero-shot classification <strong>without any additional
-                                training</strong>.
-                                Our generative approach to classification attains strong results on a variety of benchmarks and outperforms alternative methods of extracting knowledge from diffusion models. 
+                            In this paper, we show that the density estimates from large-scale text-to-image diffusion models like Stable Diffusion can be leveraged to perform zero-shot classification <em>without any additional
+                                training</em>.
+                                Our generative approach to classification, which we call <span class="method-name">Diffusion Classifier</span>, attains strong results on a variety of benchmarks and outperforms alternative methods of extracting knowledge from diffusion models. 
                                 We also find that our diffusion-based approach has stronger <i>multimodal</i> relational reasoning abilities than competing contrastive approaches. 
                             </p>
                             <p>
@@ -228,76 +226,6 @@
         </div>
     </section>
 
-    <!-- TODO -->
-    <section class="section">
-        <div class="container is-max-desktop">
-            <!-- Derivation. -->
-            <div class="columns is-centered has-text-centered">
-                <div class="column is-three-quarters">
-                    <h2 class="title is-3">Classification with diffusion models</h2>
-                    <div class="content has-text-justified">
-                        <p>
-                            In general, classification using a conditional generative model can be done by using Bayes' theorem on the model predictions and the prior \(p(\mathbf{c})\) over labels \(\{\mathbf{c}_i\}\):
-                            <!-- $$
-                                p_\theta(\mathbf{c}_i \mid \mathbf{x}) = \frac{p(\mathbf{c}_i)\ p_\theta(\mathbf{x} \mid \mathbf{c}_i)}{\sum_j p(\mathbf{c}_j)\ p_\theta(\mathbf{x} \mid \mathbf{c}_j)}
-                                \tag{eq:bayes}
-                            $$ -->
-                            \begin{equation}
-                                p_\theta(\mathbf{c}_i \mid \mathbf{x}) = \frac{p(\mathbf{c}_i)\ p_\theta(\mathbf{x} \mid \mathbf{c}_i)}{\sum_j p(\mathbf{c}_j)\ p_\theta(\mathbf{x} \mid \mathbf{c}_j)}
-                            \label{eq:bayes}
-                            \end{equation}
-                        </p>
-                        <p>
-                            A uniform prior over \(\{\mathbf{c}_i\}\) (<i>i.e.,</i> \(p(\mathbf{c}_i) = \frac{1}{N}\)) is natural and leads to all of the \(p(\mathbf{c})\) terms cancelling. For diffusion models, computing \(p_\theta(\mathbf{x}\mid \mathbf{c})\) is intractable, so we use the ELBO (see paper &sect3.1) in place of \(\log p_\theta(\mathbf{x} \mid \mathbf{c})\) and use Eq.&nbsp;\ref{eq:bayes} to obtain a posterior distribution over \(\{\mathbf{c}_i\}_{i=1}^N\):
-                            \begin{align}
-                                p_\theta(\mathbf{c}_i \mid  \mathbf{x}) 
-                                &\approx \frac{\exp\{- \mathbb{E}_{t, \epsilon}[\|\epsilon - \epsilon_\theta(\mathbf{x}_t, \mathbf{c}_i)\|^2] + C \}}{\sum_j \exp\{- \mathbb{E}_{t, \epsilon}[\|\epsilon - \epsilon_\theta(\mathbf{x}_t, \mathbf{c}_j)\|^2] + C\}} \\
-                                &= \frac{\exp\{- \mathbb{E}_{t, \epsilon}[\|\epsilon - \epsilon_\theta(\mathbf{x}_t, \mathbf{c}_i)\|^2]\}}{\sum_j \exp\{- \mathbb{E}_{t, \epsilon}[\|\epsilon - \epsilon_\theta(\mathbf{x}_t, \mathbf{c}_j)\|^2]\}} 
-                            \label{eq:posterior}
-                            \end{align}
-                        </p>
-                        <p>
-                            We compute an unbiased Monte Carlo estimate of each expectation by sampling \(N\) \((t_i, \epsilon_i)\) pairs, with \(t_i \sim [0, 1000]\) and \(\epsilon \sim \mathcal{N}(0, I)\), and computing
-                            \begin{align}
-                                \frac{1}{N}\sum_{i=1}^N \left\|\epsilon_i - \epsilon_\theta(\sqrt{\bar \alpha_{t_i}}\mathbf{x} + \sqrt{1-\bar\alpha_{t_i}} \epsilon_i, \mathbf{c}_j)\right\|^2
-                            \label{eq:monte_carlo}
-                            \end{align}
-                        </p>
-                        <p>
-                            By plugging Eq.&nbsp;\ref{eq:monte_carlo} into Eq.&nbsp;\ref{eq:posterior}, we can extract a classifier from <i>any</i> conditional diffusion model.
-                            This method, which we call <span class="method-name">Diffusion Classifier</span>, is a <i>powerful, hyperparameter-free approach to extracting classifiers from pretrained diffusion models without any additional training.</i>
-                            <span class="method-name">Diffusion Classifier</span> can be used to extract a zero-shot classifier from a text-to-image model like Stable Diffusion, to extract a standard classifier from a class-conditional diffusion model like DiT, and so on. We provide an overview of our method in section below.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <!--/ Derivation. -->
-        </div>
-    </section>
-
-    <section class="section">
-        <div class="container is-max-desktop">
-            <!-- Setting. -->
-            <!-- <div class="columns is-centered has-text-centered">
-                <div class="column is-three-quarters">
-                    <h2 class="title is-3">Learn a task-specific model by exploring the web</h2>
-                    <div class="content has-text-justified">
-                        <p>
-                            Given unlabeled data for a target task, <span class="method-name">Internet
-                                Explorer</span> searches the Internet to progressively find more and more relevant
-                            training data via self-supervised training.
-                        </p>
-                    </div>
-                    <video id="setting-video" autoplay muted playsinline height="100%"
-                        poster="./static/images/explorer_setting.jpg" class="mp4-gif">
-                        <source src="./static/videos/ie_setting.mp4" type="video/mp4">
-                    </video>
-                </div>
-            </div> -->
-            <!--/ Setting. -->
-        </div>
-    </section>
-
 
     <section class="section" id="method-overview">
         <div class="container is-max-desktop">
@@ -307,12 +235,7 @@
                     <h2 class="title is-3">Method Overview</h2>
                     <div class="content has-text-justified ">
                         <p>
-                            <span class="method-name">Diffusion Classifier</span> iteratively repeats 4 steps to find and
-                            learn
-                            from relevant Internet data.
-                            It cycles between searching for images on the Internet with text queries, self-supervised
-                            training on downloaded images, determining which images are relevant to the target dataset,
-                            and prioritizing what to search for next.
+                            <span class="method-name">Diffusion Classifier</span> extracts a classifier from a conditional diffusion model without any additional training. 
                         </p>
                     </div>
                 </div>
@@ -343,9 +266,74 @@
                 </div>
             </div>
             <!--/ Method Overview -->
+            <!-- Derivation. -->
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-three-quarters">
+                    <h2 class="title is-3">Classification with diffusion models</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                            In general, classification using a conditional generative model can be done by using Bayes' theorem on the model predictions and the prior \(p(\mathbf{c})\) over labels \(\{\mathbf{c}_i\}\):
+                            <!-- $$
+                                p_\theta(\mathbf{c}_i \mid \mathbf{x}) = \frac{p(\mathbf{c}_i)\ p_\theta(\mathbf{x} \mid \mathbf{c}_i)}{\sum_j p(\mathbf{c}_j)\ p_\theta(\mathbf{x} \mid \mathbf{c}_j)}
+                                \tag{eq:bayes}
+                            $$ -->
+                            \begin{equation}
+                                p_\theta(\mathbf{c}_i \mid \mathbf{x}) = \frac{p(\mathbf{c}_i)\ p_\theta(\mathbf{x} \mid \mathbf{c}_i)}{\sum_j p(\mathbf{c}_j)\ p_\theta(\mathbf{x} \mid \mathbf{c}_j)}
+                            \label{eq:bayes}
+                            \end{equation}
+                        </p>
+                        <p>
+                            A uniform prior over \(\{\mathbf{c}_i\}\) (<i>i.e.,</i> \(p(\mathbf{c}_i) = \frac{1}{N}\)) is natural and leads to all of the \(p(\mathbf{c})\) terms cancelling. For diffusion models, computing \(p_\theta(\mathbf{x}\mid \mathbf{c})\) is intractable, so we use the ELBO (see paper &sect3.1) in place of \(\log p_\theta(\mathbf{x} \mid \mathbf{c})\) and use Eq.&nbsp;\ref{eq:bayes} to obtain the posterior over \(\{\mathbf{c}_i\}_{i=1}^N\):
+                            \begin{align}
+                                p_\theta(\mathbf{c}_i \mid  \mathbf{x}) 
+                                &\approx \frac{\exp\{- \mathbb{E}_{t, \epsilon}[\|\epsilon - \epsilon_\theta(\mathbf{x}_t, \mathbf{c}_i)\|^2]\}}{\sum_j \exp\{- \mathbb{E}_{t, \epsilon}[\|\epsilon - \epsilon_\theta(\mathbf{x}_t, \mathbf{c}_j)\|^2]\}} 
+                            \label{eq:posterior}
+                            \end{align}
+                        </p>
+                        <p>
+                            We compute an unbiased Monte Carlo estimate of each expectation by sampling \(N\) \((t_i, \epsilon_i)\) pairs, with \(t_i \sim [1, 1000]\) and \(\epsilon \sim \mathcal{N}(0, I)\), and computing
+                            \begin{align}
+                                \frac{1}{N}\sum_{i=1}^N \left\|\epsilon_i - \epsilon_\theta(\sqrt{\bar \alpha_{t_i}}\mathbf{x} + \sqrt{1-\bar\alpha_{t_i}} \epsilon_i, \mathbf{c}_j)\right\|^2
+                            \label{eq:monte_carlo}
+                            \end{align}
+                        </p>
+                        <p>
+                            By plugging Eq.&nbsp;\ref{eq:monte_carlo} into Eq.&nbsp;\ref{eq:posterior}, we can extract a classifier from <i>any</i> conditional diffusion model.
+                            This method, which we call <span class="method-name">Diffusion Classifier</span>, is a <i>powerful, hyperparameter-free approach to extracting classifiers from pretrained diffusion models without any additional training.</i>
+                            <span class="method-name">Diffusion Classifier</span> can be used to extract a zero-shot classifier from a text-to-image model like Stable Diffusion, to extract a standard classifier from a class-conditional diffusion model like DiT, and so on.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!--/ Derivation. -->
 
         </div>
     </section>
+
+    <section class="section">
+        <div class="container is-max-desktop">
+            <!-- Setting. -->
+            <!-- <div class="columns is-centered has-text-centered">
+                <div class="column is-three-quarters">
+                    <h2 class="title is-3">Learn a task-specific model by exploring the web</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                            Given unlabeled data for a target task, <span class="method-name">Internet
+                                Explorer</span> searches the Internet to progressively find more and more relevant
+                            training data via self-supervised training.
+                        </p>
+                    </div>
+                    <video id="setting-video" autoplay muted playsinline height="100%"
+                        poster="./static/images/explorer_setting.jpg" class="mp4-gif">
+                        <source src="./static/videos/ie_setting.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div> -->
+            <!--/ Setting. -->
+        </div>
+    </section>
+
+
 
     <section class="section">
         <!-- Progression. -->
