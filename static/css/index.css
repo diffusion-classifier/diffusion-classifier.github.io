@@ -234,12 +234,14 @@ table {
     border-collapse: separate;
     border-spacing: 5px;
     /* width: 100%; */
-    /* text-align: left; */
+    text-align: right;
     /* border: 1px solid #ddd; */
+    margin: 0 auto;
 }
-
-.td-la {
-    text-align: left;
+caption {
+    padding: 10px;
+    caption-side: bottom;
+    font-weight: 500;
 }
 
 /* bibtex formatting */

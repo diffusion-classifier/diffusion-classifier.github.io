@@ -172,10 +172,10 @@
                 </div>
             </div>
         </div>
-    <!-- </section> -->
+        <!-- </section> -->
 
-    <!-- Method Overview -->
-    <!-- <section class="section" id="method-overview"> -->
+        <!-- Method Overview -->
+        <!-- <section class="section" id="method-overview"> -->
         <div class="container is-max-widescreen">
             <div class="columns is-centered has-text-centered">
                 <div class="column is-three-quarters">
@@ -234,17 +234,28 @@
                     <h2 class="title is-3">Abstract</h2>
                     <div class="content has-text-justified">
                         <p>
-                            The recent wave of large-scale text-to-image diffusion models has dramatically increased our text-based image generation abilities. These models can generate realistic images for a staggering variety of prompts and exhibit impressive compositional generalization abilities. 
-                            Almost all use cases thus far have solely focused on <i>sampling</i>; however, diffusion models can also provide conditional density estimates, which are useful for tasks beyond image generation.
+                            The recent wave of large-scale text-to-image diffusion models has dramatically increased our
+                            text-based image generation abilities. These models can generate realistic images for a
+                            staggering variety of prompts and exhibit impressive compositional generalization abilities.
+                            Almost all use cases thus far have solely focused on <i>sampling</i>; however, diffusion
+                            models can also provide conditional density estimates, which are useful for tasks beyond
+                            image generation.
                         </p>
                         <p>
-                            In this paper, we show that the density estimates from large-scale text-to-image diffusion models like Stable Diffusion can be leveraged to perform zero-shot classification <em>without any additional
+                            In this paper, we show that the density estimates from large-scale text-to-image diffusion
+                            models like Stable Diffusion can be leveraged to perform zero-shot classification
+                            <em>without any additional
                                 training</em>.
-                                Our generative approach to classification, which we call <span class="method-name">Diffusion Classifier</span>, attains strong results on a variety of benchmarks and outperforms alternative methods of extracting knowledge from diffusion models. 
-                                We also find that our diffusion-based approach has stronger <i>multimodal</i> relational reasoning abilities than competing contrastive approaches. 
-                            </p>
-                            <p>
-                            Finally, we evaluate diffusion models trained on ImageNet and find that they approach the performance of SOTA discriminative classifiers trained on the same dataset, even with weak augmentations and no regularization.
+                            Our generative approach to classification, which we call <span class="method-name">Diffusion
+                                Classifier</span>, attains strong results on a variety of benchmarks and outperforms
+                            alternative methods of extracting knowledge from diffusion models.
+                            We also find that our diffusion-based approach has stronger <i>multimodal</i> relational
+                            reasoning abilities than competing contrastive approaches.
+                        </p>
+                        <p>
+                            Finally, we evaluate diffusion models trained on ImageNet and find that they approach the
+                            performance of SOTA discriminative classifiers trained on the same dataset, even with weak
+                            augmentations and no regularization.
                         </p>
                     </div>
                 </div>
@@ -277,41 +288,60 @@
                     <h2 class="title is-3">Classification with diffusion models</h2>
                     <div class="content has-text-justified">
                         <p>
-                            In general, classification using a conditional generative model can be done by using Bayes' theorem on the model predictions and the prior \(p(\mathbf{c})\) over labels \(\{\mathbf{c}_i\}\):
+                            In general, classification using a conditional generative model can be done by using Bayes'
+                            theorem on the model predictions and the prior \(p(\mathbf{c})\) over labels
+                            \(\{\mathbf{c}_i\}\):
                             <!-- $$
                                 p_\theta(\mathbf{c}_i \mid \mathbf{x}) = \frac{p(\mathbf{c}_i)\ p_\theta(\mathbf{x} \mid \mathbf{c}_i)}{\sum_j p(\mathbf{c}_j)\ p_\theta(\mathbf{x} \mid \mathbf{c}_j)}
                                 \tag{eq:bayes}
                             $$ -->
                             \begin{equation}
-                                p_\theta(\mathbf{c}_i \mid \mathbf{x}) = \frac{p(\mathbf{c}_i)\ p_\theta(\mathbf{x} \mid \mathbf{c}_i)}{\sum_j p(\mathbf{c}_j)\ p_\theta(\mathbf{x} \mid \mathbf{c}_j)}
+                            p_\theta(\mathbf{c}_i \mid \mathbf{x}) = \frac{p(\mathbf{c}_i)\ p_\theta(\mathbf{x} \mid
+                            \mathbf{c}_i)}{\sum_j p(\mathbf{c}_j)\ p_\theta(\mathbf{x} \mid \mathbf{c}_j)}
                             \label{eq:bayes}
                             \end{equation}
                         </p>
                         <p>
-                            A uniform prior over \(\{\mathbf{c}_i\}\) (<i>i.e.,</i> \(p(\mathbf{c}_i) = \frac{1}{N}\)) is natural and leads to all of the \(p(\mathbf{c})\) terms cancelling. For diffusion models, computing \(\log p_\theta(\mathbf{x}\mid \mathbf{c})\) is intractable, so we approximate it with the ELBO (see paper &sect3.1), from which we have dropped constant and weighting terms:
+                            A uniform prior over \(\{\mathbf{c}_i\}\) (<i>i.e.,</i> \(p(\mathbf{c}_i) = \frac{1}{N}\))
+                            is natural and leads to all of the \(p(\mathbf{c})\) terms cancelling. For diffusion models,
+                            computing \(\log p_\theta(\mathbf{x}\mid \mathbf{c})\) is intractable, so we approximate it
+                            with the ELBO (see paper &sect3.1), from which we have dropped constant and weighting terms:
                             \begin{align}
-                                \text{ELBO} \approx - \mathbb{E}_{t, \epsilon}[\|\epsilon - \epsilon_\theta(\mathbf{x}_t, \mathbf{c}_i)\|^2]
+                            \text{ELBO} \approx - \mathbb{E}_{t, \epsilon}[\|\epsilon - \epsilon_\theta(\mathbf{x}_t,
+                            \mathbf{c}_i)\|^2]
+                            \label{eq:elbo}
                             \end{align}
                         </p>
                         <p>
-                            We plug the modified ELBO into Eq.&nbsp\ref{eq:bayes} to obtain the posterior over \(\{\mathbf{c}_i\}_{i=1}^N\):
+                            We plug the modified ELBO Eq.&nbsp\ref{eq:elbo} into Eq.&nbsp\ref{eq:bayes} to obtain the posterior over
+                            \(\{\mathbf{c}_i\}_{i=1}^N\):
                             \begin{align}
-                                p_\theta(\mathbf{c}_i \mid  \mathbf{x}) 
-                                &\approx \frac{\exp\{- \mathbb{E}_{t, \epsilon}[\|\epsilon - \epsilon_\theta(\mathbf{x}_t, \mathbf{c}_i)\|^2]\}}{\sum_j \exp\{- \mathbb{E}_{t, \epsilon}[\|\epsilon - \epsilon_\theta(\mathbf{x}_t, \mathbf{c}_j)\|^2]\}} 
+                            p_\theta(\mathbf{c}_i \mid \mathbf{x})
+                            &\approx \frac{\exp\{- \mathbb{E}_{t, \epsilon}[\|\epsilon - \epsilon_\theta(\mathbf{x}_t,
+                            \mathbf{c}_i)\|^2]\}}{\sum_j \exp\{- \mathbb{E}_{t, \epsilon}[\|\epsilon -
+                            \epsilon_\theta(\mathbf{x}_t, \mathbf{c}_j)\|^2]\}}
                             \label{eq:posterior}
                             \end{align}
                         </p>
                         <p>
-                            We compute an unbiased Monte Carlo estimate of each expectation by sampling \(N\) \((t_i, \epsilon_i)\) pairs, with \(t_i \sim [1, 1000]\) and \(\epsilon \sim \mathcal{N}(0, I)\), and computing
+                            We compute an unbiased Monte Carlo estimate of each expectation by sampling \(N\) \((t_i,
+                            \epsilon_i)\) pairs, with \(t_i \sim [1, 1000]\) and \(\epsilon \sim \mathcal{N}(0, I)\),
+                            and computing
                             \begin{align}
-                                \frac{1}{N}\sum_{i=1}^N \left\|\epsilon_i - \epsilon_\theta(\sqrt{\bar \alpha_{t_i}}\mathbf{x} + \sqrt{1-\bar\alpha_{t_i}} \epsilon_i, \mathbf{c}_j)\right\|^2
+                            \frac{1}{N}\sum_{i=1}^N \left\|\epsilon_i - \epsilon_\theta(\sqrt{\bar
+                            \alpha_{t_i}}\mathbf{x} + \sqrt{1-\bar\alpha_{t_i}} \epsilon_i, \mathbf{c}_j)\right\|^2
                             \label{eq:monte_carlo}
                             \end{align}
                         </p>
                         <p>
-                            By plugging Eq.&nbsp;\ref{eq:monte_carlo} into Eq.&nbsp;\ref{eq:posterior}, we can extract a classifier from <i>any</i> conditional diffusion model.
-                            This method, which we call <span class="method-name">Diffusion Classifier</span>, is a <i>powerful, hyperparameter-free approach to extracting classifiers from pretrained diffusion models without any additional training.</i>
-                            <span class="method-name">Diffusion Classifier</span> can be used to extract a zero-shot classifier from a text-to-image model like Stable Diffusion, to extract a standard classifier from a class-conditional diffusion model like DiT, and so on.
+                            By plugging Eq.&nbsp;\ref{eq:monte_carlo} into Eq.&nbsp;\ref{eq:posterior}, we can extract a
+                            classifier from <i>any</i> conditional diffusion model.
+                            This method, which we call <span class="method-name">Diffusion Classifier</span>, is a
+                            <i>powerful, hyperparameter-free approach that leverages pretrained diffusion models for classification without any additional training.</i>
+                            <span class="method-name">Diffusion Classifier</span> can be used to extract a zero-shot
+                            classifier from a text-to-image model like <a target="_blank" href="https://github.com/Stability-AI/stablediffusion">Stable Diffusion</a>, to extract a standard
+                            classifier from a class-conditional diffusion model like <a
+                            target="_blank" href="https://arxiv.org/abs/2212.09748">DiT</a>, and so on.
                         </p>
                     </div>
                 </div>
@@ -324,13 +354,34 @@
         <!-- Zero Shot. -->
         <div class="container is-max-desktop">
             <div class="columns is-centered has-text-centered">
-                <h2 class="title is-3">Zero-shot Classification</h2>
+                <div class="column is-three-quarters">
+                    <h2 class="title is-3">Zero-shot Classification</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                            We build <span class="method-name">Diffusion Classifier</span> on top of
+                            <a target="_blank" href="https://github.com/Stability-AI/stablediffusion">Stable Diffusion</a>, a
+                            text-to-image latent diffusion model trained on a filtered subset of <a
+                            target="_blank" href="https://laion.ai/blog/laion-5b/">LAION-5B</a>.
+                            Our zero-shot classification method is
+                            competitive with CLIP and significantly outperforms the zero-shot diffusion model baseline
+                            that trains a
+                            classifier on synthetic SD data. It also generally outperforms the baseline trained on
+                            Stable Diffusion
+                            features, especially on complex datasets like ImageNet. This is especially impressive since
+                            the "SD Features"
+                            baseline uses the entire training set to train a classifier.
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
         <p style="padding: 20px;" />
         <div class="is-centered has-text-centered">
             <div class="table-container is-max-desktop">
                 <table style="width:100%">
+                    <caption>
+                        Zero-shot classification performance on a suite of tasks.
+                    </caption>
                     <tr>
                         <th></th>
                         <th>Zero-shot?</th>
@@ -348,7 +399,7 @@
                         <td colspan="11" style="border-bottom: 1px solid #ddd;"></td>
                     </tr>
                     <tr>
-                        <td class="td-la">Synthetic SD Data</td>
+                        <td>Synthetic SD Data</td>
                         <!-- <td>&#10003;</td> -->
                         <td style="color:lime">&#10003;</td>
                         <td>12.6</td>
@@ -419,26 +470,6 @@
                 </table>
             </div>
         </div>
-        <p style="padding: 20px;" />
-        <div class="container is-max-desktop">
-            <!-- Derivation. -->
-            <div class="columns is-centered has-text-centered">
-                <div class="column is-three-quarters">
-                    <!-- <h5 class="title is-4">Zero-shot classification performance on a suite of benchmark classification tasks.</h5> -->
-                    <div class="content has-text-justified">
-                        <strong>Zero-shot classification performance on a suite of benchmark classification tasks.</strong>
-                        Our zero-shot <span class="method-name">Diffusion Classifier</span> method, which utilizes Stable Diffusion, is
-                        competitive with CLIP and significantly outperforms the zero-shot diffusion model baseline that trains a
-                        classifier on synthetic SD data. It also generally outperforms the baseline trained on Stable Diffusion
-                        features, especially on complex datasets like ImageNet. This is especially impressive since the "SD Features"
-                        baseline uses the entire training set to train a classifier.
-                        <p>
-
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
         <!--/ Zero Shot. -->
     </section>
 
@@ -449,12 +480,74 @@
                     <h2 class="title is-3">Improved Relational Reasoning Abilities</h2>
                     <div class="content has-text-justified">
                         <p>
-                            We compare our zero-shot <span class="method-name">Diffusion Classifier</span> method to CLIP and OpenCLIP on Winoground, a popular benchmark for evaluating the visuo-linguistic compositional reasoning abilities of vision-language models. This benchmark tests whether models can match captions to the correct images when certain entities are swapped in the captions. 
+                            We compare our zero-shot <span class="method-name">Diffusion Classifier</span> method to
+                            CLIP and OpenCLIP on
+                            <a href="https://arxiv.org/abs/2204.03162" target="_blank">Winoground</a>,
+                            a popular benchmark for evaluating the visuo-linguistic compositional reasoning abilities of vision-language models. This benchmark tests whether models can match captions to the correct images when certain entities are swapped in the
+                            captions.
                         </p>
                         <!-- TODO: table and exemplar success failures?  -->
+                    </div>
+                </div>
+            </div>
+            <div class="table-container is-max-desktop is-centered" >
+                <table style="width:70%">
+                    <caption>
+                        Zero-shot reasoning results on Winoground
+                    </caption>
+                    <thead>
+                        <tr>
+                            <th>Model</th>
+                            <th>Object</th>
+                            <th>Relation</th>
+                            <th>Both</th>
+                            <th>Average</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="11" style="border-bottom: 1px solid #ddd;"></td>
+                        </tr>
+                        <tr>
+                            <td>Random Chance</td>
+                            <td>25.0</td>
+                            <td>25.0</td>
+                            <td>25.0</td>
+                            <td>25.0</td>
+                        </tr>
+                        <tr>
+                            <td>CLIP ViT-L/14</td>
+                            <td>27.0</td>
+                            <td>25.8</td>
+                            <td>57.7</td>
+                            <td>28.2</td>
+                        </tr>
+                        <tr>
+                            <td>OpenCLIP ViT-H/14</td>
+                            <td>39.0</td>
+                            <td><strong>26.6</strong></td>
+                            <td>57.7</td>
+                            <td>33.0</td>
+                        </tr>
+                        <tr>
+                            <td>Diffusion Classifier (ours)</td>
+                            <td><strong>41.8</strong></td>
+                            <td>25.3</td>
+                            <td><strong>69.2</strong></td>
+                            <td><strong>34.0</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-three-quarters">
+                    <div class="content has-text-justified">
                         <p>
-                            Diffusion Classifier clearly outperfroms when object swaps are involved (Object and Both). Since Stable Diffusion uses the same text
-                            encoder as OpenCLIP ViT-H/14, this improvement must come from better cross-modal binding of concepts to images. Overall, we find it surprising that Stable Diffusion, trained with only sampling in mind, can be repurposed into such a good classifier and reasoner.
+                            Diffusion Classifier clearly outperfroms when object swaps are involved (Object and Both).
+                            Since Stable Diffusion uses the same text
+                            encoder as OpenCLIP ViT-H/14, this improvement must come from better cross-modal binding of
+                            concepts to images. Overall, we find it surprising that Stable Diffusion, trained with only
+                            sampling in mind, can be repurposed into such a good classifier and reasoner.
                         </p>
                     </div>
                 </div>
@@ -469,11 +562,22 @@
                     <h2 class="title is-3">Strong Standard Classification Ability</h2>
                     <div class="content has-text-justified">
                         <p>
-                            We use <span class="method-name">Diffusion Classifier</span> to obtain a standard 1000-way classifier on ImageNet from a pretrained <a href="https://arxiv.org/abs/2212.09748">Diffusion Transformer</a> (DiT) model. DiT is a class-conditional diffusion model trained solely on ImageNet-1k, with only random horizontal flips and no regularization. We compare <span class="method-name">Diffusion Classifier</span> in this setting to strong discriminative classifiers like ResNet-50 and ViT-B/16. 
-                        </p>    
+                            We use <span class="method-name">Diffusion Classifier</span> to obtain a standard 1000-way
+                            classifier on ImageNet from a pretrained <a
+                            target="_blank" href="https://arxiv.org/abs/2212.09748">Diffusion Transformer</a> (DiT) model. DiT is a
+                            class-conditional diffusion model trained solely on ImageNet-1k, with only random horizontal
+                            flips and no regularization. We compare <span class="method-name">Diffusion
+                                Classifier</span> in this setting to strong discriminative classifiers like ResNet-50
+                            and ViT-B/16.
+                        </p>
                         <!-- TODO: table 3 -->
                         <p>
-                        Despite the fact that the discriminative models are trained with highly tuned learning rate schedulers, augmentation strategies, and regularizers, <span class="method-name">Diffusion Classifier</span> outperforms many of them on ImageNet, both in-distribution and out-of-distribution. To the best of our knowledge, our approach is among the first generative modeling approaches to be competitive with SOTA discriminative classifiers on ImageNet. 
+                            Despite the fact that the discriminative models are trained with highly tuned learning rate
+                            schedulers, augmentation strategies, and regularizers, <span class="method-name">Diffusion
+                                Classifier</span> outperforms many of them on ImageNet, both in-distribution and
+                            out-of-distribution. To the best of our knowledge, our approach is among the first
+                            generative modeling approaches to be competitive with SOTA discriminative classifiers on
+                            ImageNet.
                         </p>
                     </div>
                 </div>
