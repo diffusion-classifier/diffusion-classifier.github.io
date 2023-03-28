@@ -58,17 +58,9 @@
     <script src="https://cdn.jsdelivr.net/npm/prismjs-bibtex@2.0.1/prism-bibtex.min.js">
     </script>
 
-    <!-- https://realfavicongenerator.net/ -->
-    <link rel="apple-touch-icon" sizes="180x180" href="./static/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="./static/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="./static/favicon/favicon-16x16.png">
-    <link rel="manifest" href="./static/favicon/site.webmanifest">
-    <link rel="shortcut icon" href="./static/favicon/favicon.ico">
-    <meta name="apple-mobile-web-app-title" content="Diffusion Classifier">
-    <meta name="application-name" content="Diffusion Classifier">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="msapplication-config" content="./static/favicon/browserconfig.xml">
-    <meta name="theme-color" content="#ffffff">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔎</text></svg>">
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
@@ -80,7 +72,7 @@
     <!-- mathjax -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
 </head>
 
 <body>
@@ -250,15 +242,24 @@
                     <p style="padding: 10px;" />
                     <div>
                         <div class="method-overview-full-img method-overview">
-                            <div class="method-overview-title">Overview of <span class="method-name">Diffusion Classifier</span> approach</div>
+                            <div class="method-overview-title">Overview of <span class="method-name">Diffusion
+                                    Classifier</span> approach</div>
                             <div class="method-overview-text has-text-justified">
                                 <p>
                                     <!-- TODO: -->
-                                    Given an input image and a set of possible conditioning inputs (e.g., text for Stable Diffusion or class index for DiT), we want to use a diffusion model to choose the one that best fits this image. <span class="method-name">Diffusion Classifier</span>  is theoretically motivated through the variational view of diffusion models and uses the ELBO to approximate
+                                    Given an input image and a set of possible conditioning inputs (e.g., text for
+                                    Stable Diffusion or class index for DiT), we want to use a diffusion model to choose
+                                    the one that best fits this image. <span class="method-name">Diffusion
+                                        Classifier</span> is theoretically motivated through the variational view of
+                                    diffusion models and uses the ELBO to approximate
                                     \(\log p_{\theta}(x|\mathbf c).\)
                                     <span class="method-name">Diffusion Classifier</span> chooses the conditioning
                                     \(\mathbf c\)
-                                    that best predicts the noise added to the input image. <span class="method-name">Diffusion Classifier</span>  can be used to extract a <u>zero-shot classifier from a text-to-image model (like Stable Diffusion)</u> and a <u>standard classifier from a class-conditional model (like DiT)</u> without any additional training
+                                    that best predicts the noise added to the input image. <span
+                                        class="method-name">Diffusion Classifier</span> can be used to extract a
+                                    <u>zero-shot classifier from a text-to-image model (like Stable Diffusion)</u> and a
+                                    <u>standard classifier from a class-conditional model (like DiT)</u> without any
+                                    additional training
                                 </p>
                             </div>
                         </div>
@@ -317,32 +318,13 @@
     </section>
 
     <section class="section">
+        <!-- Zero Shot. -->
         <div class="container is-max-desktop">
-            <!-- Setting. -->
-            <!-- <div class="columns is-centered has-text-centered">
-                <div class="column is-three-quarters">
-                    <h2 class="title is-3">Learn a task-specific model by exploring the web</h2>
-                    <div class="content has-text-justified">
-                        <p>
-                            Given unlabeled data for a target task, <span class="method-name">Internet
-                                Explorer</span> searches the Internet to progressively find more and more relevant
-                            training data via self-supervised training.
-                        </p>
-                    </div>
-                    <video id="setting-video" autoplay muted playsinline height="100%"
-                        poster="./static/images/explorer_setting.jpg" class="mp4-gif">
-                        <source src="./static/videos/ie_setting.mp4" type="video/mp4">
-                    </video>
-                </div>
-            </div> -->
-            <!--/ Setting. -->
+            <div class="columns is-centered has-text-centered">
+                <h2 class="title is-3">Zero-shot Classification</h2>
+            </div>
         </div>
-    </section>
-
-
-
-    <section class="section">
-        <!-- Progression. -->
+        <p style="padding: 20px;" />
         <div class="is-centered has-text-centered">
             <div class="table-container is-max-desktop">
                 <table style="width:100%">
@@ -434,7 +416,27 @@
                 </table>
             </div>
         </div>
-        <!--/ Progression. -->
+        <p style="padding: 20px;" />
+        <div class="container is-max-desktop">
+            <!-- Derivation. -->
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-three-quarters">
+                    <!-- <h5 class="title is-4">Zero-shot classification performance on a suite of benchmark classification tasks.</h5> -->
+                    <div class="content has-text-justified">
+                        <strong>Zero-shot classification performance on a suite of benchmark classification tasks.</strong>
+                        Our zero-shot <span class="method-name">Diffusion Classifier</span> method, which utilizes Stable Diffusion, is
+                        competitive with CLIP and significantly outperforms the zero-shot diffusion model baseline that trains a
+                        classifier on synthetic SD data. It also generally outperforms the baseline trained on Stable Diffusion
+                        features, especially on complex datasets like ImageNet. This is especially impressive since the "SD Features"
+                        baseline uses the entire training set to train a classifier.
+                        <p>
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/ Zero Shot. -->
     </section>
 
     <section class="section" id="paper">
