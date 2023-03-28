@@ -283,7 +283,13 @@
                             \end{equation}
                         </p>
                         <p>
-                            A uniform prior over \(\{\mathbf{c}_i\}\) (<i>i.e.,</i> \(p(\mathbf{c}_i) = \frac{1}{N}\)) is natural and leads to all of the \(p(\mathbf{c})\) terms cancelling. For diffusion models, computing \(p_\theta(\mathbf{x}\mid \mathbf{c})\) is intractable, so we use the ELBO (see paper &sect3.1) in place of \(\log p_\theta(\mathbf{x} \mid \mathbf{c})\) and use Eq.&nbsp;\ref{eq:bayes} to obtain the posterior over \(\{\mathbf{c}_i\}_{i=1}^N\):
+                            A uniform prior over \(\{\mathbf{c}_i\}\) (<i>i.e.,</i> \(p(\mathbf{c}_i) = \frac{1}{N}\)) is natural and leads to all of the \(p(\mathbf{c})\) terms cancelling. For diffusion models, computing \(p_\theta(\mathbf{x}\mid \mathbf{c})\) is intractable, so we approximate it with the ELBO (see paper &sect3.1), from which we have dropped constant and weighting terms:
+                            \begin{align}
+                                \text{ELBO} \approx - \mathbb{E}_{t, \epsilon}[\|\epsilon - \epsilon_\theta(\mathbf{x}_t, \mathbf{c}_i)\|^2]
+                            \end{align}
+                        </p>
+                        <p>
+                            We plug the modified ELBO into Eq.&nbsp\ref{eq:bayes} to obtain the posterior over \(\{\mathbf{c}_i\}_{i=1}^N\):
                             \begin{align}
                                 p_\theta(\mathbf{c}_i \mid  \mathbf{x}) 
                                 &\approx \frac{\exp\{- \mathbb{E}_{t, \epsilon}[\|\epsilon - \epsilon_\theta(\mathbf{x}_t, \mathbf{c}_i)\|^2]\}}{\sum_j \exp\{- \mathbb{E}_{t, \epsilon}[\|\epsilon - \epsilon_\theta(\mathbf{x}_t, \mathbf{c}_j)\|^2]\}} 
