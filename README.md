@@ -1,8 +1,8 @@
-# Internet Explorer
+# Diffusion Classifier
 
-This repository contains the source code for the [Internet Explorer project page](http://internet-explorer-ssl.github.io/).
+This repository contains the source code for the [Diffusion Classifier project page](https://diffusion-classifier.github.io/).
 
-If you find Internet Explorer useful for your work, please cite:
+If you find Diffusion Classifier useful for your work, please cite:
 
 ```bibtex
 @misc{li2023internet,
