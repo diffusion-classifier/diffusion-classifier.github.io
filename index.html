@@ -248,7 +248,7 @@
                             \end{equation}
                         </p>
                         <p>
-                            A uniform prior over \(\{\mathbf{c}_i\}\) (<i>i.e.,</i> \(p(\mathbf{c}_i) = \frac{1}{N}\)) is natural and leads to all of the \(p(\mathbf{c})\) terms cancelling. For diffusion models, computing \(p_\theta(\mathbf{x}\mid \mathbf{c})\) is intractable, so we use the ELBO in place of \(\log p_\theta(\mathbf{x} \mid \mathbf{c})\) and use Eq.&nbsp;\ref{eq:elbo} and Eq.&nbsp;\ref{eq:bayes} to obtain a posterior distribution over \(\{\mathbf{c}_i\}_{i=1}^N\):
+                            A uniform prior over \(\{\mathbf{c}_i\}\) (<i>i.e.,</i> \(p(\mathbf{c}_i) = \frac{1}{N}\)) is natural and leads to all of the \(p(\mathbf{c})\) terms cancelling. For diffusion models, computing \(p_\theta(\mathbf{x}\mid \mathbf{c})\) is intractable, so we use the ELBO (see paper &sect3.1) in place of \(\log p_\theta(\mathbf{x} \mid \mathbf{c})\) and use Eq.&nbsp;\ref{eq:bayes} to obtain a posterior distribution over \(\{\mathbf{c}_i\}_{i=1}^N\):
                             \begin{align}
                                 p_\theta(\mathbf{c}_i \mid  \mathbf{x}) 
                                 &\approx \frac{\exp\{- \mathbb{E}_{t, \epsilon}[\|\epsilon - \epsilon_\theta(\mathbf{x}_t, \mathbf{c}_i)\|^2] + C \}}{\sum_j \exp\{- \mathbb{E}_{t, \epsilon}[\|\epsilon - \epsilon_\theta(\mathbf{x}_t, \mathbf{c}_j)\|^2] + C\}} \\
@@ -264,9 +264,9 @@
                             \end{align}
                         </p>
                         <p>
-                            By plugging Eq.~\ref{eq:monte_carlo} into Eq.~\ref{eq:posterior}, we can extract a classifier from any conditional diffusion model. We call this method \textbf{\model}.
-                            \textit{\model is a powerful, hyperparameter-free approach to extracting classifiers from pretrained diffusion models without any additional training.}
-                            \model can be used to extract a zero-shot classifier from a text-to-image model like Stable Diffusion \cite{rombach2022high}, to extract a standard classifier from a class-conditional diffusion model like DiT \cite{Peebles2022DiT}, and so on. We show an overview of our method in Figure~\ref{fig:method}. 
+                            By plugging Eq.&nbsp;\ref{eq:monte_carlo} into Eq.&nbsp;\ref{eq:posterior}, we can extract a classifier from <i>any</i> conditional diffusion model.
+                            This method, which we call <span class="method-name">Diffusion Classifier</span>, is a <i>powerful, hyperparameter-free approach to extracting classifiers from pretrained diffusion models without any additional training.</i>
+                            <span class="method-name">Diffusion Classifier</span> can be used to extract a zero-shot classifier from a text-to-image model like Stable Diffusion, to extract a standard classifier from a class-conditional diffusion model like DiT, and so on. We provide an overview of our method in section below.
                         </p>
                     </div>
                 </div>
@@ -299,7 +299,7 @@
     </section>
 
 
-    <section class="section">
+    <section class="section" id="method-overview">
         <div class="container is-max-desktop">
             <!-- Method Overview -->
             <div class="columns is-centered has-text-centered">
