@@ -460,6 +460,25 @@
         </div>
     </section>
 
+    <section class="section">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-three-quarters">
+                    <h2 class="title is-3">Strong Standard Classification Ability</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                            We use <span class="method-name">Diffusion Classifier</span> to obtain a standard 1000-way classifier on ImageNet from a pretrained <a href="https://arxiv.org/abs/2212.09748">Diffusion Transformer</a> (DiT) model. DiT is a class-conditional diffusion model trained solely on ImageNet-1k, with only random horizontal flips and no regularization. We compare <span class="method-name">Diffusion Classifier</span> in this setting to strong discriminative classifiers like ResNet-50 and ViT-B/16. 
+                        </p>    
+                        <!-- TODO: table 3 -->
+                        <p>
+                        Despite the fact that the discriminative models are trained with highly tuned learning rate schedulers, augmentation strategies, and regularizers, <span class="method-name">Diffusion Classifier</span> outperforms many of them on ImageNet, both in-distribution and out-of-distribution. To the best of our knowledge, our approach is among the first generative modeling approaches to be competitive with SOTA discriminative classifiers on ImageNet. 
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="section" id="paper">
         <div class="container is-mobile">
             <div class="columns is-centered has-text-centered">
