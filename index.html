@@ -219,55 +219,57 @@
     </section>
 
 
+    <!-- Method Overview -->
     <section class="section" id="method-overview">
-        <div class="container is-max-desktop">
-            <!-- Method Overview -->
+        <div class="container is-max-widescreen">
             <div class="columns is-centered has-text-centered">
                 <div class="column is-three-quarters">
                     <h2 class="title is-3">Method Overview</h2>
-                    <div class="content has-text-justified ">
-                        <p>
-                            <span class="method-name">Diffusion Classifier</span> extracts a classifier from a conditional diffusion model without any additional training. 
-                        </p>
-                    </div>
                 </div>
             </div>
-            <p style="padding: 10px;" />
             <div class="columns is-centered has-text-centered">
                 <div class="column">
                     <div id="method-overview-wrapper">
                         <img src="./static/images/arch_figure.jpg" alt="Internet Explorer method."
                             class="method-overview-full-img  method-overview" draggable="false" />
                     </div>
-                    <p style="padding: 10px;" />
-                    <div>
-                        <div class="method-overview-full-img method-overview">
-                            <div class="method-overview-title">Overview of <span class="method-name">Diffusion
-                                    Classifier</span> approach</div>
-                            <div class="method-overview-text has-text-justified">
-                                <p>
-                                    <!-- TODO: -->
-                                    Given an input image and a set of possible conditioning inputs (e.g., text for
-                                    Stable Diffusion or class index for DiT), we want to use a diffusion model to choose
-                                    the one that best fits this image. <span class="method-name">Diffusion
-                                        Classifier</span> is theoretically motivated through the variational view of
-                                    diffusion models and uses the ELBO to approximate
-                                    \(\log p_{\theta}(x|\mathbf c).\)
-                                    <span class="method-name">Diffusion Classifier</span> chooses the conditioning
-                                    \(\mathbf c\)
-                                    that best predicts the noise added to the input image. <span
-                                        class="method-name">Diffusion Classifier</span> can be used to extract a
-                                    <u>zero-shot classifier from a text-to-image model</u> (like Stable Diffusion) and a
-                                    <u>standard classifier from a class-conditional model</u> (like DiT) without any
-                                    additional training.
-                                </p>
-                            </div>
+                </div>
+            </div>
+        </div>
+        <p style="padding: 20px;" />
+        <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-three-quarters">
+                    <div class="method-overview-full-img method-overview">
+                        <div class="method-overview-title">Overview of <span class="method-name">Diffusion
+                                Classifier</span> approach</div>
+                        <div class="method-overview-text has-text-justified">
+                            <p>
+                                Given an input image and a set of possible conditioning inputs (e.g., text for
+                                Stable Diffusion or class index for DiT), we want to use a diffusion model to choose
+                                the one that best fits this image. <span class="method-name">Diffusion
+                                    Classifier</span> is theoretically motivated through the variational view of
+                                diffusion models and uses the ELBO to approximate
+                                \(\log p_{\theta}(x|\mathbf c).\)
+                                <span class="method-name">Diffusion Classifier</span> chooses the conditioning
+                                \(\mathbf c\)
+                                that best predicts the noise added to the input image. <span
+                                    class="method-name">Diffusion Classifier</span> can be used to extract a
+                                <u>zero-shot classifier from a text-to-image model</u> (like Stable Diffusion) and a
+                                <u>standard classifier from a class-conditional model</u> (like DiT) without any
+                                additional training.
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
-            <!--/ Method Overview -->
-            <!-- Derivation. -->
+        </div>
+    </section>
+    <!--/ Method Overview -->
+
+    <!-- Derivation. -->
+    <section>
+        <div class="container is-max-desktop">
             <div class="columns is-centered has-text-centered">
                 <div class="column is-three-quarters">
                     <h2 class="title is-3">Classification with diffusion models</h2>
@@ -312,10 +314,9 @@
                     </div>
                 </div>
             </div>
-            <!--/ Derivation. -->
-
         </div>
     </section>
+    <!--/ Derivation. -->
 
     <section class="section">
         <!-- Zero Shot. -->
@@ -446,7 +447,12 @@
                     <h2 class="title is-3">Improved Relational Reasoning Abilities</h2>
                     <div class="content has-text-justified">
                         <p>
-                            We compare our zero-shot <span class="method-name">Diffusion Classifier</span> method to contrastive models like CLIP on Winoground, a popular benchmark for evaluating the visuo-linguistic compositional reasoning abilities of vision-language models.
+                            We compare our zero-shot <span class="method-name">Diffusion Classifier</span> method to CLIP and OpenCLIP on Winoground, a popular benchmark for evaluating the visuo-linguistic compositional reasoning abilities of vision-language models. This benchmark tests whether models can match captions to the correct images when certain entities are swapped in the captions. 
+                        </p>
+                        <!-- TODO: table and exemplar success failures?  -->
+                        <p>
+                            Diffusion Classifier clearly outperfroms when object swaps are involved (Object and Both). Since Stable Diffusion uses the same text
+                            encoder as OpenCLIP ViT-H/14, this improvement must come from better cross-modal binding of concepts to images. Overall, we find it surprising that Stable Diffusion, trained with only sampling in mind, can be repurposed into such a good classifier and reasoner.
                         </p>
                     </div>
                 </div>
