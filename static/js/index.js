@@ -137,3 +137,10 @@ async function copyCode(block, button) {
         button.innerText = copyButtonLabel;
     }, 700);
 }
+
+
+window.MathJax = {
+    tex: {
+        tags: 'ams'
+    }
+};

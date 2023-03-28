@@ -18,30 +18,16 @@ body {
 .publication-title {}
 
 #main-title {
-    font-weight: 800;
-    font-style: italic;
-    white-space: nowrap;
+    font-weight: 700;
+    font-size: 0.8em;
+    font-size: 0.7em;
+    /* font-style: italic; */
+    /* white-space: nowrap; */
 }
 
 #sub-title {
     font-weight: 500;
     font-size: 0.8em;
-}
-
-@media screen and (max-width: 1001px) {
-    #main-title {
-        font-size: 0.9em;
-    }
-    #sub-title {
-        font-size: 0.75em !important;
-    }
-}
-
-
-@media screen and (min-width: 1001px) {
-    #sub-title {
-        white-space: nowrap;
-    }
 }
 
 
@@ -236,15 +222,25 @@ a:hover {
     display: none;
 }
 
-
-.div #sfc63tjw7yey348a8swe2yndrut1sd2hr2g {
-    margin: 0 auto !important;
+.table-container{
+    overflow-x: scroll; /* add horizontal scrollbar */
+    white-space: nowrap; /* keep content in a single line */
+    max-width: 1300px;
+    margin: 0 auto;
 }
 
-#sfc63tjw7yey348a8swe2yndrut1sd2hr2g>img {
-    margin: 0 auto !important;
+
+table {
+    border-collapse: separate;
+    border-spacing: 5px;
+    /* width: 100%; */
+    /* text-align: left; */
+    /* border: 1px solid #ddd; */
 }
 
+.td-la {
+    text-align: left;
+}
 
 /* bibtex formatting */
 /* https://www.roboleary.net/2022/01/13/copy-code-to-clipboard-blog.html */
