@@ -5,11 +5,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
     <meta charset="utf-8">
-    <meta property="og:title" content="Internet Explorer: Targeted Representation Learning on the Open Web" />
-    <meta property="og:description"
-        content="Internet Explorer learns to query the Web for relevant training data via self-supervised exploration." />
-    <meta property="og:url" content="https://internet-explorer-ssl.github.io/" />
-    <meta property="og:image" content="https://internet-explorer-ssl.github.io/static/images/preview.jpg" />
+    <meta property="og:title" content="Diffusion Classifier" />
+    <meta property="og:description" content="Your Diffusion Model is Secretly a Zero-Shot Classifier" />
+    <meta property="og:url" content="https://diffusion-classifier.github.io/" />
+    <!-- TODO: UPDATE -->
+    <!-- <meta property="og:image" content="https://internet-explorer-ssl.github.io/static/images/preview.jpg" /> -->
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="628" />
     <meta name="description"
@@ -22,23 +22,23 @@
     <meta name="twitter:title" content="Internet Explorer: Targeted Representation Learning on the Open Web" />
     <meta name="twitter:description"
         content="Internet Explorer learns to query the Web for relevant training data via self-supervised exploration." />
-    <meta name="twitter:url" content="https://internet-explorer-ssl.github.io/" />
-    <meta name="twitter:image" content="https://internet-explorer-ssl.github.io/static/images/preview.jpg" />
+    <meta name="twitter:url" content="https://diffusion-classifier.github.io/" />
+    <meta name="twitter:image" content="https://diffusion-classifier.github.io/static/images/preview.jpg" />
     <meta name="twitter:site" content="@pathak2206" />
-    <meta name="twitter:image" content="https://internet-explorer-ssl.github.io/static/images/preview.jpg" />
-    <meta name="twitter:image:src" content="https://internet-explorer-ssl.github.io/static/images/preview.jpg" />
+    <meta name="twitter:image" content="https://diffusion-classifier.github.io/static/images/preview.jpg" />
+    <meta name="twitter:image:src" content="https://diffusion-classifier.github.io/static/images/preview.jpg" />
     <meta name="twitter:image_alt" content="Internet Explorer: Targeted Representation Learning on the Open Web" />
 
-    <title>Internet Explorer: Targeted Representation Learning on the Open Web</title>
+    <title>Diffusion Classifier</title>
 
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q1LE05X8FC"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RYWGEJGP6S"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
 
-        gtag('config', 'G-Q1LE05X8FC');
+        gtag('config', 'G-RYWGEJGP6S');
     </script>
 
     <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
@@ -58,12 +58,14 @@
     <script src="https://cdn.jsdelivr.net/npm/prismjs-bibtex@2.0.1/prism-bibtex.min.js">
     </script>
 
-    <link rel="apple-touch-icon" sizes="76x76" href="./static/favicon/apple-touch-icon.png">
+    <!-- https://realfavicongenerator.net/ -->
+    <link rel="apple-touch-icon" sizes="180x180" href="./static/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./static/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./static/favicon/favicon-16x16.png">
     <link rel="manifest" href="./static/favicon/site.webmanifest">
-    <link rel="mask-icon" href="./static/favicon/safari-pinned-tab.svg" color="#5bbad5">
     <link rel="shortcut icon" href="./static/favicon/favicon.ico">
+    <meta name="apple-mobile-web-app-title" content="Diffusion Classifier">
+    <meta name="application-name" content="Diffusion Classifier">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="msapplication-config" content="./static/favicon/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
@@ -75,11 +77,6 @@
     <script src="./static/js/bulma-carousel.min.js"></script>
     <script src="./static/js/bulma-slider.min.js"></script>
 
-    <!-- https://github.com/tholman/cursor-effects -->
-    <script type="module">
-        import { fairyDustCursor } from "https://unpkg.com/cursor-effects@latest/dist/esm.js";
-        new fairyDustCursor();
-    </script>
 </head>
 
 <body>
@@ -89,15 +86,14 @@
                 <div class="columns is-centered">
                     <div class="column has-text-centered">
                         <p style="padding: 20px;" />
+                        <p style="padding: 20px;" />
                         <h1 class="title is-1 publication-title">
                             <span id="main-title">
-                                <div id="worldmap" style="display: inline-block;"></div>
-                                Internet Explorer:
-                                <div id="worldmap" style="display: inline-block;"></div>
+                                Diffusion Classifier
                                 <br>
                             </span>
                             <span id="sub-title">
-                                Targeted Representation Learning on the Open Web
+                                Your Diffusion Model is Secretly a Zero-Shot Classifier
                             </span>
                         </h1>
                         <div class="is-size-5 publication-authors">
@@ -127,8 +123,8 @@
 
                         <p style="padding: 20px;" />
 
-                        <div class="buttons has-addons is-centered">
-                            <button class="external-link button is-medium is-ghost publication-links">
+                        <div class="buttons is-centered">
+                            <button class="external-link button is-medium is-ghost publication-links is-rounded">
                                 <a href="https://arxiv.org/abs/2302.14051" target="_blank"
                                     style="text-decoration:none;">
                                     <span class="icon is-small">
@@ -137,7 +133,7 @@
                                     <span>arXiv</span>
                                 </a>
                             </button>
-                            <button class="external-link button is-medium is-ghost publication-links">
+                            <button class="external-link button is-medium is-ghost publication-links is-rounded">
                                 <a href="./static/docs/InternetExplorer.pdf" target="_blank">
                                     <span class="icon is-small">
                                         <i class="fas fa-file-pdf"></i>
@@ -145,22 +141,22 @@
                                     <span>pdf</span>
                                 </a>
                             </button>
-                            <button class="external-link button is-medium is-ghost publication-links">
+                            <!-- <button class="external-link button is-medium is-ghost publication-links is-rounded">
                                 <a href="https://youtu.be/1hYtGZ0CUSA" target="_blank">
                                     <span class="icon">
                                         <i class="fab fa-youtube"></i>
                                     </span><span>video</span>
                                 </a>
-                            </button>
-                            <button class="external-link button is-medium is-ghost publication-links">
+                            </button> -->
+                            <!-- <button class="external-link button is-medium is-ghost publication-links is-rounded">
                                 <a href="./static/docs/InternetExplorer.pptx" target="_blank">
                                     <span class="icon is-small">
                                         <i class="fas fa-file-powerpoint"></i>
                                     </span>
                                     <span>slides</span>
                                 </a>
-                            </button>
-                            <button class="external-link button is-medium is-ghost publication-links">
+                            </button> -->
+                            <button class="external-link button is-medium is-ghost publication-links is-rounded">
                                 <a href="https://github.com/internet-explorer-ssl/internet-explorer" target="_blank">
                                     <span class="icon is-small">
                                         <i class="fab fa-github"></i>
@@ -184,36 +180,31 @@
                     <h2 class="title is-3">Abstract</h2>
                     <div class="content has-text-justified">
                         <p>
-                            Vision models heavily rely on fine-tuning general-purpose models pre-trained on large,
-                            static datasets. These general-purpose models only understand knowledge <em>within</em>
-                            their pre-training datasets, which are tiny, out-of-date snapshots of the
-                            Internet&mdash;where billions of images are uploaded each day.
+                            The recent wave of large-scale text-to-image diffusion models has dramatically increased our
+                            text-based image generation abilities. These models can generate realistic images for a
+                            staggering variety of prompts and exhibit impressive compositional generalization abilities.
                         </p>
                         <p>
-                            We suggest an alternate approach: rather than hoping our static datasets transfer to our
-                            desired tasks after large-scale pre-training, we propose dynamically utilizing the Internet
-                            to quickly train a small-scale model that does extremely well on the task at hand.
-                            Our approach, called <span class="intexp">Internet Explorer</span>, explores the web in a
-                            self-supervised manner to progressively find relevant examples that improve performance on a
-                            desired target dataset.
-                            It cycles between searching for images on the Internet with text queries, self-supervised
-                            training on downloaded images, determining which images were useful, and prioritizing what
-                            to search for next.
+                            Almost all use cases thus far have solely focused on <emph>sampling</emph>; however, diffusion models can
+                            also provide conditional density estimates, which are useful for tasks beyond image
+                            generation.
                         </p>
-                        We evaluate <span class="intexp">Internet Explorer</span> across several datasets and show that
-                        it outperforms or matches CLIP oracle performance by using just a single GPU desktop to actively
-                        query the Internet for 30&ndash;40 hours.
                         <p>
+                            In this paper, we show that the density estimates from large-scale text-to-image diffusion
+                            models can be leveraged to perform zero-shot classification <strong>without any additional
+                                training</strong>. Our generative approach to classification attains strong results on a
+                            variety of benchmarks and outperforms alternative methods of extracting knowledge from
+                            diffusion models.
                         </p>
                     </div>
                 </div>
             </div>
             <!--/ Abstract. -->
 
-            <p style="padding: 20px;" />
-
+            
             <!-- Paper video. -->
-            <div class="columns is-centered has-text-centered">
+            <!-- <p style="padding: 20px;" /> -->
+            <!-- <div class="columns is-centered has-text-centered">
                 <div class="column is-four-fifths">
                     <h2 class="title is-3">Video</h2>
                     <div class="publication-video">
@@ -223,7 +214,7 @@
                             allowfullscreen></iframe>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!--/ Paper video. -->
         </div>
     </section>
@@ -525,51 +516,42 @@
     <footer class="footer">
         <div class="container">
             <div class="content has-text-centered">
+                <!-- TODO: UPDATE -->
                 <a class="icon-link" href="https://arxiv.org/abs/2302.14051" target="_blank">
                     <i class="ai ai-arxiv"></i>
                 </a>
                 &nbsp;
+                <!-- TODO: UPDATE -->
                 <a class="icon-link" href="./static/docs/InternetExplorer.pdf" target="_blank">
                     <i class="fas fa-file-pdf"></i>
                 </a>
-                &nbsp;
+                <!-- &nbsp;
                 <a class="icon-link" href="https://youtu.be/1hYtGZ0CUSA" target="_blank">
                     <i class="fab fa-youtube"></i>
-                </a>
-                &nbsp;
-                <!-- slides -->
+                </a> -->
+                <!-- &nbsp;
                 <a class="icon-link" href="./static/docs/InternetExplorer.pptx" target="_blank">
                     <i class="fas fa-file-powerpoint"></i>
-                </a>
+                </a> -->
                 &nbsp;
-                <a class="icon-link" href="https://github.com/internet-explorer-ssl/internet-explorer" target="_blank">
+                <a class="icon-link" href="https://github.com/diffusion-classifier/diffusion-classifier"
+                    target="_blank">
                     <i class="fab fa-github"></i>
                 </a>
-                <p style="padding: 1px;" />
-                <div class="column is-centered" style="padding: 0 auto !important; text-align: center !important;">
-                    <div id="sfc63tjw7yey348a8swe2yndrut1sd2hr2g"
-                        style="margin 0 auto !important; text-align: center !important;">
-                        ></div>
-                    <script type="text/javascript"
-                        src="./static/js/counter.js"
-                        async></script><noscript><a href="https://www.freecounterstat.com" title="free counter"><img
-                                src="https://counter4.optistats.ovh/private/freecounterstat.php?c=63tjw7yey348a8swe2yndrut1sd2hr2g"
-                                border="0" title="free counter" alt="free counter"></a></noscript>
-                </div>
             </div>
             <div class="columns is-centered">
                 <div class="content">
                     <p>
-                        Page source code was adapted from <a href="https://nerfies.github.io" target="_blank">here</a>
+                        Page source code was adapted from <a href="https://internet-explorer-ssl.github.io"
+                            target="_blank">here</a>
                         and can be found in <a
-                            href="https://github.com/internet-explorer-ssl/internet-explorer-ssl.github.io"
+                            href="https://github.com/diffusion-classifier/diffusion-classifier.github.io"
                             target="_blank">this repository</a>.
                     </p>
                 </div>
             </div>
     </footer>
 
-    <script src="./static/js/globe.js"></script>
     <script src="./static/js/index.js"></script>
     <script src="./static/js/prism.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs-bibtex@2.0.1/prism-bibtex.js"
