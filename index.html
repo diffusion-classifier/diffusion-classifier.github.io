@@ -207,10 +207,10 @@
                                 the one that best fits this image. <span class="method-name">Diffusion
                                     Classifier</span> is theoretically motivated through the variational view of
                                 diffusion models and uses the ELBO to approximate
-                                \(\log p_{\theta}(x|\mathbf c).\)
+                                \(\log p_{\theta}(\mathbf x|\mathbf c).\)
                                 Diffusion Classifier chooses the conditioning
                                 \(\mathbf c\)
-                                that best predicts the noise added to the input image. Diffusion Classifier can be used to extract a
+                                that best predicts the noise added to the input image \(\mathbf x\). Diffusion Classifier can be used to extract a
                                 <u>zero-shot classifier from a text-to-image model</u> (like Stable Diffusion) and a
                                 <u>standard classifier from a class-conditional model</u> (like DiT) without any
                                 additional training.
@@ -492,7 +492,7 @@
                 <div class="column is-three-quarters">
                     <div class="content has-text-justified">
                         <p>
-                            <span class="method-name">Diffusion Classifier</span> clearly outperfroms when object swaps are involved (Object and Both below).
+                            <span class="method-name">Diffusion Classifier</span> clearly outperforms when object swaps are involved (Object and Both below).
                             Since Stable Diffusion uses the same text
                             encoder as OpenCLIP ViT-H/14, this improvement must come from better cross-modal binding of
                             concepts to images. Overall, we find it surprising that Stable Diffusion, trained with only
