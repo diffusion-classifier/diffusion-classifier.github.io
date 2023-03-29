@@ -256,6 +256,10 @@ th:first-child, td:first-child {
     text-align: right !important;
 }
 
+.table-highlight {
+    background-color: #D2EBD8;
+}
+
 caption {
     padding: 10px;
     caption-side: bottom;

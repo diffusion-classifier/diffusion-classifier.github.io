@@ -209,7 +209,8 @@
                                 \(\log p_{\theta}(x|\mathbf c).\)
                                 Diffusion Classifier chooses the conditioning
                                 \(\mathbf c\)
-                                that best predicts the noise added to the input image. Diffusion Classifier can be used to extract a
+                                that best predicts the noise added to the input image. Diffusion Classifier can be used
+                                to extract a
                                 <u>zero-shot classifier from a text-to-image model</u> (like Stable Diffusion) and a
                                 <u>standard classifier from a class-conditional model</u> (like DiT) without any
                                 additional training.
@@ -251,7 +252,12 @@
                             reasoning abilities than competing contrastive approaches.
                         </p>
                         <p>
-                            Finally, we use Diffusion Classifier to extract standard classifiers from class-conditional diffusion models trained on ImageNet. Even though these diffusion models are trained with weak augmentations and no regularization, we find that they approach the performance of SOTA discriminative ImageNet classifiers. Overall, our strong generalization and robustness results represent an encouraging step toward using generative over discriminative models for downstream tasks.
+                            Finally, we use Diffusion Classifier to extract standard classifiers from class-conditional
+                            diffusion models trained on ImageNet. Even though these diffusion models are trained with
+                            weak augmentations and no regularization, we find that they approach the performance of SOTA
+                            discriminative ImageNet classifiers. Overall, our strong generalization and robustness
+                            results represent an encouraging step toward using generative over discriminative models for
+                            downstream tasks.
                         </p>
                     </div>
                 </div>
@@ -309,7 +315,8 @@
                             \end{align}
                         </p>
                         <p>
-                            We plug the modified ELBO Eq.&nbsp\ref{eq:elbo} into Eq.&nbsp\ref{eq:bayes} to obtain the posterior over
+                            We plug the modified ELBO Eq.&nbsp\ref{eq:elbo} into Eq.&nbsp\ref{eq:bayes} to obtain the
+                            posterior over
                             \(\{\mathbf{c}_i\}_{i=1}^N\):
                             \begin{align}
                             p_\theta(\mathbf{c}_i \mid \mathbf{x})
@@ -333,11 +340,14 @@
                             By plugging Eq.&nbsp;\ref{eq:monte_carlo} into Eq.&nbsp;\ref{eq:posterior}, we can extract a
                             classifier from <i>any</i> conditional diffusion model.
                             This method, which we call <span class="method-name">Diffusion Classifier</span>, is a
-                            <i>powerful, hyperparameter-free approach that leverages pretrained diffusion models for classification without any additional training.</i>
+                            <i>powerful, hyperparameter-free approach that leverages pretrained diffusion models for
+                                classification without any additional training.</i>
                             Diffusion Classifier can be used to extract a zero-shot
-                            classifier from a text-to-image model like <a target="_blank" href="https://github.com/Stability-AI/stablediffusion">Stable Diffusion</a>, to extract a standard
-                            classifier from a class-conditional diffusion model like <a
-                            target="_blank" href="https://arxiv.org/abs/2212.09748">DiT</a>, and so on.
+                            classifier from a text-to-image model like <a target="_blank"
+                                href="https://github.com/Stability-AI/stablediffusion">Stable Diffusion</a>, to extract
+                            a standard
+                            classifier from a class-conditional diffusion model like <a target="_blank"
+                                href="https://arxiv.org/abs/2212.09748">DiT</a>, and so on.
                         </p>
                     </div>
                 </div>
@@ -355,9 +365,10 @@
                     <div class="content has-text-justified">
                         <p>
                             We build <span class="method-name">Diffusion Classifier</span> on top of
-                            <a target="_blank" href="https://github.com/Stability-AI/stablediffusion">Stable Diffusion</a>, a
-                            text-to-image latent diffusion model trained on a filtered subset of <a
-                            target="_blank" href="https://laion.ai/blog/laion-5b/">LAION-5B</a>.
+                            <a target="_blank" href="https://github.com/Stability-AI/stablediffusion">Stable
+                                Diffusion</a>, a
+                            text-to-image latent diffusion model trained on a filtered subset of <a target="_blank"
+                                href="https://laion.ai/blog/laion-5b/">LAION-5B</a>.
                             Our zero-shot classification method is
                             competitive with CLIP and significantly outperforms the zero-shot diffusion model baseline
                             that trains a
@@ -480,7 +491,9 @@
                             We compare our zero-shot <span class="method-name">Diffusion Classifier</span> method to
                             CLIP and OpenCLIP on
                             <a href="https://arxiv.org/abs/2204.03162" target="_blank">Winoground</a>,
-                            a popular benchmark for evaluating the visuo-linguistic compositional reasoning abilities of vision-language models. This benchmark tests whether models can match captions to the correct images when certain entities are swapped in the
+                            a popular benchmark for evaluating the visuo-linguistic compositional reasoning abilities of
+                            vision-language models. This benchmark tests whether models can match captions to the
+                            correct images when certain entities are swapped in the
                             captions.
                         </p>
                     </div>
@@ -491,8 +504,8 @@
                 <div class="columns is-centered has-text-centered">
                     <div class="column is-three-fourths">
                         <figure>
-                            <img src="./static/images/winoground.jpeg" alt="Winoground examples"
-                            id="winoground-image" draggable="false" />
+                            <img src="./static/images/winoground.jpeg" alt="Winoground examples" id="winoground-image"
+                                draggable="false" />
                             <figcaption>
                                 Results on selected Winoground image-caption pairs.
                             </figcaption>
@@ -505,7 +518,8 @@
                 <div class="column is-three-quarters">
                     <div class="content has-text-justified">
                         <p>
-                            <span class="method-name">Diffusion Classifier</span> clearly outperfroms when object swaps are involved (Object and Both below).
+                            <span class="method-name">Diffusion Classifier</span> clearly outperfroms when object swaps
+                            are involved (Object and Both below).
                             Since Stable Diffusion uses the same text
                             encoder as OpenCLIP ViT-H/14, this improvement must come from better cross-modal binding of
                             concepts to images. Overall, we find it surprising that Stable Diffusion, trained with only
@@ -514,7 +528,7 @@
                     </div>
                 </div>
             </div>
-            <div class="table-container is-max-desktop is-centered" >
+            <div class="table-container is-max-desktop is-centered">
                 <table style="width:70%">
                     <caption>
                         Zero-shot reasoning results on Winoground
@@ -574,24 +588,110 @@
                     <div class="content has-text-justified">
                         <p>
                             We use <span class="method-name">Diffusion Classifier</span> to obtain a standard 1000-way
-                            classifier on ImageNet from a pretrained <a
-                            target="_blank" href="https://arxiv.org/abs/2303.16203">Diffusion Transformer</a> (DiT) model. DiT is a
+                            classifier on ImageNet from a pretrained <a target="_blank"
+                                href="https://arxiv.org/abs/2303.16203">Diffusion Transformer</a> (DiT) model. DiT is a
                             class-conditional diffusion model trained solely on ImageNet-1k, with only random horizontal
-                            flips and no regularization. We compare Diffusion Classifier in this setting to strong 
-                            discriminative classifiers like ResNet-50 and ViT-B/16.
-                        </p>
-                        <!-- TODO: table 3 -->
-                        <p>
-                            Despite the fact that the discriminative models are trained with highly tuned learning rate
-                            schedulers, augmentation strategies, and regularizers, Diffusion Classifier outperforms 
-                            many of them on ImageNet, both in-distribution and out-of-distribution. 
-                            <strong>To the best of our knowledge, our approach is among the first
-                            generative modeling approaches to be competitive with SOTA discriminative classifiers on
-                            ImageNet.</strong>
+                            flips and no regularization. We compare Diffusion Classifier in this setting to strong
+                            discriminative classifiers like ResNet-50 and ViT-B/16 in the table below.
+                            We highlight cells in green where Diffusion Classifier outperforms.
                         </p>
                     </div>
                 </div>
             </div>
+            <div class="table-container is-max-desktop is-centered">
+                <table>
+                    <caption>
+                        Diffusion Classifier performs well ID and OOD.
+                    </caption>
+                    <thead>
+                        <tr>
+                            <th rowspan="2">Method</th>
+                            <th colspan="1"  style="text-align: right !important;">ID</th>
+                            <th colspan="3" style="text-align: center !important;">OOD</th>
+                        </tr>
+                        <tr>
+                            <th>IN</th>
+                            <th>IN-v2</th>
+                            <th>IN-A</th>
+                            <th>ObjectNet</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="11" style="border-bottom: 1px solid #ddd;"></td>
+                        </tr>
+                        <tr>
+                            <td>ResNet-18</td>
+                            <td class="table-highlight">74.1</td>
+                            <td class="table-highlight">57.3</td>
+                            <td class="table-highlight">15.0</td>
+                            <td class="table-highlight">26.6</td>
+                        </tr>
+                        <tr>
+                            <td>ResNet-34</td>
+                            <td class="table-highlight">78.1</td>
+                            <td class="table-highlight">59.8</td>
+                            <td class="table-highlight">10.5</td>
+                            <td class="table-highlight">31.6</td>
+                        </tr>
+                        <tr>
+                            <td>ResNet-50</td>
+                            <td>79.7</td>
+                            <td class="table-highlight">61.6</td>
+                            <td class="table-highlight">9.8</td>
+                            <td>35.6</td>
+                        </tr>
+                        <tr>
+                            <td>ResNet-101</td>
+                            <td>82.2</td>
+                            <td>63.2</td>
+                            <td class="table-highlight">19.5</td>
+                            <td>38.2</td>
+                        </tr>
+                        <tr>
+                            <td>ViT-L/32</td>
+                            <td>79.0</td>
+                            <td class="table-highlight">61.6</td>
+                            <td>26.3</td>
+                            <td class="table-highlight">29.9</td>
+                        </tr>
+                        <tr>
+                            <td>ViT-L/16</td>
+                            <td>81.0</td>
+                            <td>66.6</td>
+                            <td>25.6</td>
+                            <td>36.7</td>
+                        </tr>
+                        <tr>
+                            <td>ViT-B/16</td>
+                            <td>83.4</td>
+                            <td>66.6</td>
+                            <td>30.1</td>
+                            <td>37.8</td>
+                        </tr>
+                        <tr>
+                            <td><span class="method-name">Diffusion Classifier</span></td>
+                            <td>78.9</td>
+                            <td>62.1</td>
+                            <td>22.6</td>
+                            <td>32.3</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-three-quarters">
+                    <div class="content has-text-justified">
+                        <p>
+                            Despite the fact that the discriminative models are trained with highly tuned learning rate
+                            schedulers, augmentation strategies, and regularizers, Diffusion Classifier outperforms
+                            many of them on ImageNet, both in-distribution and out-of-distribution.
+                            <strong>To the best of our knowledge, our approach is among the first generative modeling approaches to be competitive with SOTA discriminative classifiers on ImageNet.</strong>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
         </div>
     </section>
 
@@ -645,8 +745,11 @@
             <div class="columns is-centered">
                 <div class="content">
                     <p>
-                        Page source code was adapted from <a href="https://internet-explorer-ssl.github.io"
-                            target="_blank">here</a>
+                        Page source code was adapted from
+                        <a href="https://nerfies.github.io" target="_blank">here</a>
+                        and
+                        <a href="https://internet-explorer-ssl.github.io"
+                            target="_blank">here</a>,
                         and can be found in <a
                             href="https://github.com/diffusion-classifier/diffusion-classifier.github.io"
                             target="_blank">this repository</a>.
