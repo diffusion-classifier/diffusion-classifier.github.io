@@ -203,15 +203,14 @@
                         <div class="method-overview-text has-text-justified">
                             <p>
                                 Given an input image and a set of possible conditioning inputs (e.g., text for
-                                Stable Diffusion or class index for DiT), we want to use a diffusion model to choose
+                                Stable Diffusion or class index for DiT), we use a diffusion model to choose
                                 the one that best fits this image. <span class="method-name">Diffusion
                                     Classifier</span> is theoretically motivated through the variational view of
                                 diffusion models and uses the ELBO to approximate
                                 \(\log p_{\theta}(x|\mathbf c).\)
-                                <span class="method-name">Diffusion Classifier</span> chooses the conditioning
+                                Diffusion Classifier chooses the conditioning
                                 \(\mathbf c\)
-                                that best predicts the noise added to the input image. <span
-                                    class="method-name">Diffusion Classifier</span> can be used to extract a
+                                that best predicts the noise added to the input image. Diffusion Classifier can be used to extract a
                                 <u>zero-shot classifier from a text-to-image model</u> (like Stable Diffusion) and a
                                 <u>standard classifier from a class-conditional model</u> (like DiT) without any
                                 additional training.
@@ -253,9 +252,7 @@
                             reasoning abilities than competing contrastive approaches.
                         </p>
                         <p>
-                            Finally, we evaluate diffusion models trained on ImageNet and find that they approach the
-                            performance of SOTA discriminative classifiers trained on the same dataset, even with weak
-                            augmentations and no regularization.
+                            Finally, we use Diffusion Classifier to extract standard classifiers from class-conditional diffusion models trained on ImageNet. Even though these diffusion models are trained with weak augmentations and no regularization, we find that they approach the performance of SOTA discriminative ImageNet classifiers. Overall, our strong generalization and robustness results represent an encouraging step toward using generative over discriminative models for downstream tasks.
                         </p>
                     </div>
                 </div>
