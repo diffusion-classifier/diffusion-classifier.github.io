@@ -128,7 +128,7 @@
 
                         <div class="buttons is-centered">
                             <button class="external-link button is-medium is-ghost publication-links is-rounded">
-                                <a href="https://arxiv.org/abs/2302.14051" target="_blank"
+                                <a href="https://arxiv.org/abs/2303.16203" target="_blank"
                                     style="text-decoration:none;">
                                     <span class="icon is-small">
                                         <i class="ai ai-arxiv"></i>
@@ -404,13 +404,14 @@
                         <td style="color:lime">&#10003;</td>
                         <td>12.6</td>
                         <td>35.3</td>
-                        <td>9.4</td>
+                        <!-- add spaces to make it render inline -->
+                        <td>&nbsp;&nbsp;&nbsp;9.4</td>
                         <td>31.3</td>
                         <td>22.1</td>
                         <td>27.9</td>
                         <td>38.0</td>
                         <td>18.9</td>
-                        <td>5.2</td>
+                        <td>&nbsp;&nbsp;&nbsp;5.2</td>
                     </tr>
                     <tr>
                         <td>SD Features</td>
@@ -426,7 +427,7 @@
                         <td style="color:lightgray">10.2</td>
                     </tr>
                     <tr>
-                        <td>Diffusion Classifier (ours)</td>
+                        <td><span class="method-name">Diffusion Classifier</span></td>
                         <td style="color:lime">&#10003;</td>
                         <td><b>77.9</b></td>
                         <td>76.3</td>
@@ -490,6 +491,19 @@
                     </div>
                 </div>
             </div>
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-three-quarters">
+                    <div class="content has-text-justified">
+                        <p>
+                            <span class="method-name">Diffusion Classifier</span> clearly outperfroms when object swaps are involved (Object and Both below).
+                            Since Stable Diffusion uses the same text
+                            encoder as OpenCLIP ViT-H/14, this improvement must come from better cross-modal binding of
+                            concepts to images. Overall, we find it surprising that Stable Diffusion, trained with only
+                            sampling in mind, can be repurposed into such a good classifier and reasoner.
+                        </p>
+                    </div>
+                </div>
+            </div>
             <div class="table-container is-max-desktop is-centered" >
                 <table style="width:70%">
                     <caption>
@@ -530,7 +544,7 @@
                             <td>33.0</td>
                         </tr>
                         <tr>
-                            <td>Diffusion Classifier (ours)</td>
+                            <td><span class="method-name">Diffusion Classifier</span></td>
                             <td><strong>41.8</strong></td>
                             <td>25.3</td>
                             <td><strong>69.2</strong></td>
@@ -538,19 +552,6 @@
                         </tr>
                     </tbody>
                 </table>
-            </div>
-            <div class="columns is-centered has-text-centered">
-                <div class="column is-three-quarters">
-                    <div class="content has-text-justified">
-                        <p>
-                            Diffusion Classifier clearly outperfroms when object swaps are involved (Object and Both).
-                            Since Stable Diffusion uses the same text
-                            encoder as OpenCLIP ViT-H/14, this improvement must come from better cross-modal binding of
-                            concepts to images. Overall, we find it surprising that Stable Diffusion, trained with only
-                            sampling in mind, can be repurposed into such a good classifier and reasoner.
-                        </p>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -564,7 +565,7 @@
                         <p>
                             We use <span class="method-name">Diffusion Classifier</span> to obtain a standard 1000-way
                             classifier on ImageNet from a pretrained <a
-                            target="_blank" href="https://arxiv.org/abs/2212.09748">Diffusion Transformer</a> (DiT) model. DiT is a
+                            target="_blank" href="https://arxiv.org/abs/2303.16203">Diffusion Transformer</a> (DiT) model. DiT is a
                             class-conditional diffusion model trained solely on ImageNet-1k, with only random horizontal
                             flips and no regularization. We compare <span class="method-name">Diffusion
                                 Classifier</span> in this setting to strong discriminative classifiers like ResNet-50
@@ -592,11 +593,11 @@
                     <h2 class="title is-3">BibTeX</h2>
                     <div id="bibtex" class="column has-text-justified is-centered">
                         <!-- https://github.com/SaswatPadhi/prismjs-bibtex -->
-                        <pre><code class="language-bibtex">@misc{li2023internet,
-    title={Internet Explorer: Targeted Representation Learning on the Open Web}, 
-    author={Alexander C. Li and Ellis Brown and Alexei A. Efros and Deepak Pathak},
+                        <pre><code class="language-bibtex">@misc{li2023diffusion,
+    title={Your Diffusion Model is Secretly a Zero-Shot Classifier}, 
+    author={Alexander C. Li and Mihir Prabhudesai and Shivam Duggal and Ellis Brown and Deepak Pathak},
     year={2023},
-    eprint={2302.14051},
+    eprint={2303.16203},
     archivePrefix={arXiv},
     primaryClass={cs.LG}
 }</code></pre>
@@ -610,7 +611,7 @@
         <div class="container">
             <div class="content has-text-centered">
                 <!-- TODO: UPDATE -->
-                <a class="icon-link" href="https://arxiv.org/abs/2302.14051" target="_blank">
+                <a class="icon-link" href="https://arxiv.org/abs/2303.16203" target="_blank">
                     <i class="ai ai-arxiv"></i>
                 </a>
                 &nbsp;
