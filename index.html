@@ -179,42 +179,32 @@
     <section class="section" id="method-overview">
         <div class="container is-max-widescreen">
             <div class="columns is-centered has-text-centered">
-                <div class="column is-three-quarters">
+                <div class="column" style="border-radius: 10px; background-color: rgb(245,245,245)">
                     <h2 class="title is-3">
                         <span class="method-name">"Diffusion Classifier"</span>
                     </h2>
-                </div>
-            </div>
-            <div class="columns is-centered has-text-centered">
-                <div class="column">
+                    <p style="padding: 10px;" />
                     <div id="method-overview-wrapper">
                         <img src="./static/images/arch_figure.jpg" alt="Diffusion Classifier method."
                             class="method-overview-full-img  method-overview" draggable="false" />
                     </div>
-                </div>
-            </div>
-        </div>
-        <p style="padding: 20px;" />
-        <div class="container is-max-desktop">
-            <div class="columns is-centered has-text-centered">
-                <div class="column is-three-quarters">
-                    <div class="method-overview-full-img method-overview">
-                        <div class="method-overview-title">Overview of the <span class="method-name">Diffusion
-                                Classifier</span> approach</div>
+                            <p style="padding: 10px;" />
                         <div class="method-overview-text has-text-justified">
                             <p>
-                                Given an input image and a set of possible conditioning inputs (e.g., text for
-                                Stable Diffusion or class index for DiT), we use a diffusion model to choose
-                                the one that best fits this image. <span class="method-name">Diffusion
-                                    Classifier</span> is theoretically motivated through the variational view of
+                                Given an input image  \(\mathbf x \) and text conditioning \(\mathbf c\),
+                                <!-- (e.g., text for Stable Diffusion or class index for DiT), -->
+                                we use a diffusion model to choose
+                                the class that best fits this image.
+                                Our approach, <span class="method-name">Diffusion Classifier</span>, is 
+                                theoretically motivated through the variational view of
                                 diffusion models and uses the ELBO to approximate
                                 \(\log p_{\theta}(\mathbf x|\mathbf c).\)
                                 Diffusion Classifier chooses the conditioning
                                 \(\mathbf c\)
                                 that best predicts the noise added to the input image. Diffusion Classifier can be used
                                 to extract a
-                                <u>zero-shot classifier from a text-to-image model</u> (like Stable Diffusion) and a
-                                <u>standard classifier from a class-conditional model</u> (like DiT) without any
+                                <i>zero-shot classifier from a text-to-image model</i> (like Stable Diffusion) and a
+                                <i>standard classifier from a class-conditional model</i> (like DiT) without any
                                 additional training.
                             </p>
                         </div>
@@ -225,7 +215,7 @@
     </section>
     <!--/ Method Overview -->
 
-    <p style="padding: 20px;" />
+    <!-- <p style="padding: 10px;" /> -->
 
     <section class="section">
         <div class="container is-max-desktop">
