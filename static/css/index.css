@@ -139,6 +139,9 @@ a:hover {
 
 .publication-body img {}
 
+#winoground-image {
+    max-width: 100%;
+}
 
 .interpolation-panel {
     background: #f5f5f5;
