@@ -248,6 +248,7 @@ a:hover {
 
 .table-container{
     overflow-x: scroll; /* add horizontal scrollbar */
+    overflow:auto;
     white-space: nowrap; /* keep content in a single line */
     max-width: 1300px;
     margin: 0 auto;
@@ -330,6 +331,7 @@ pre[class*="language-"] button:hover {
 
 .equation {
     overflow-x: scroll;
-    overflow-y: hidden;
+    overflow-y: hidden !important;
+    overflow: auto;
     padding-left: -1em !important;
 }
